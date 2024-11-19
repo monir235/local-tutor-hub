@@ -23,28 +23,42 @@ yarn-error.log*
 # Ignore system files and directories
 AppData/
 .vscode/
-.DS_Store
-.AppleDouble
-.LSOverride
+*.log
+*.tmp
 
-# Windows system files
+# Windows specific system files
 Thumbs.db
 ehthumbs.db
+Desktop.ini
 
-# Logs
-*.log
-
-# Ignore sensitive environment files (optional)
-.env
-
-# IDE specific files (optional)
+# Ignore IDE and editor specific files
 .idea/
 *.iml
 
-# Temporary and backup files
-*.swp
-*.swo
-*.tmp
-*.temp
-*.bak
-*.old
+# Ignore all files and directories that should not be tracked
+.VirtualBox/
+.android/
+.appletviewer
+.arduinoIDE/
+.cache/
+.chatgpt/
+.eclipse/
+.gitconfig
+.gradle/
+.ipynb_checkpoints/
+.ipython/
+.jupyter/
+.lesshst
+.p2/
+.tooling/
+IntelGraphicsProfiles/
+New folder/
+OneDrive/
+Saved Games/
+Searches/
+VirtualBox VMs/
+battery-report.html
+dfd.tex
+file.txt
+g.docx
+g2.mp4

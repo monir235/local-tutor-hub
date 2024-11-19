@@ -81,7 +81,7 @@ function TutorForm() {
           <option value="">Select Amount</option>
           <option value="100">100</option>
           <option value="200">200</option>
-          <option value="500">500</option>
+          <option value="400">400</option>
         </select><br />
 
         <label htmlFor="payment_option" style={{ fontWeight: 'bold' }}>Payment Option:</label><br />

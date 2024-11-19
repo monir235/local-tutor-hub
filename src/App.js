@@ -22,6 +22,7 @@ import StuLogin from './components/StuLogin';
 import StuInformation from './components/StuInformation';
 import AcceptTutor from './components/AcceptTutor';
 import AcceptStu from './components/AcceptStu';
+import MoneyCard from './components/MoneyCard';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('Login'); // Default to Login page
@@ -74,6 +75,9 @@ function App() {
         return <AcceptTutor />;
       case 'redol':
         return <AcceptStu />;
+        case 'crut':
+          return <MoneyCard/>;
+        
       default:
         return <Login onPageChange={handlePageChange} />;
     }
@@ -94,6 +98,8 @@ function App() {
           <button onClick={() => setCurrentPage('searchstu')} style={{ padding: '15px 20px', fontSize: '16px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '10px' }}>Search Student</button>
           <button onClick={() => setCurrentPage('redox')} style={{ padding: '10px 25px', fontSize: '10px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '8px' }}>Accept Tutor</button>
           <button onClick={() => setCurrentPage('redol')} style={{ padding: '8px 15px', fontSize: '10px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '8px' }}>Accept Student</button>
+          <button onClick={() => setCurrentPage('crut')} style={{ padding: '8px 15px', fontSize: '10px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '8px' }}>Collection</button>
+          
         </div>
       )}
       {renderPage()}

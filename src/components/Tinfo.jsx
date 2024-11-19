@@ -785,6 +785,32 @@ const Tinfo = () => {
   "teachingExperience": 14,
   "additionalInfo": "",
   "accepted": false
+},
+{
+  "tutorId": 61,
+  "name": "হুমাইরা জান্নাত",
+  "availability": "হা",
+  "mobileNumber": "০১২৮৯৭৫৬৪২",
+  "email": "rajesh@gmail.com",
+  "location": "বইলতলী, শ্রীপুর",
+  "institution": "ঢাকা বিশ্ববিদ্যালয়",
+  "currentSubject": "পদার্থবিদ্যা বিভাগ",
+  "teachingExperience": 2,
+  "additionalInfo": "",
+  "accepted": false
+},
+{
+  "tutorId": 62,
+  "name": "Shahrul Alam Ratul",
+  "availability": "Yes",
+  "mobileNumber": "0189325687",
+  "email": "sharul@gmail.com",
+  "location": "Fatikchari,Chittagong",
+  "institution": "Chitagong Medical College",
+  "currentSubject": "MBBS",
+  "teachingExperience": 2,
+  "additionalInfo": "",
+  "accepted": false
 }
 
   ]);

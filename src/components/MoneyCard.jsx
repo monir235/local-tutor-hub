@@ -6,6 +6,7 @@ const MoneyCard = () => {
   const [totalTeachersMoney, setTotalTeachersMoney] = useState(0);
   const [acceptedStudents, setAcceptedStudents] = useState(0);
   const [acceptedTeachers, setAcceptedTeachers] = useState(0);
+  const [fultotal, setfulltotal]=useState(0);
 
   const fixedAmount = 250; // Fixed amount for each row
 
@@ -27,6 +28,8 @@ const MoneyCard = () => {
         const teacherTotal = teachers.length * fixedAmount;
         setAcceptedTeachers(teachers.length);
         setTotalTeachersMoney(teacherTotal);
+        const fultotal = studentTotal+teacherTotal;
+        setfulltotal(fultotal);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -41,15 +44,19 @@ const MoneyCard = () => {
       {/* Card for students */}
       <div className="card">
         <h1>Total Money (Students)</h1>
-        <h3>Accepted Students Number: {acceptedStudents}</h3>
+        <h3>Total Accepted Students : {acceptedStudents}</h3>
         <h3>Total amount of money: {totalMoney} Taka</h3>
       </div>
 
       {/* Card for teachers */}
       <div className="card">
         <h1>Total Money (Teachers)</h1>
-        <h3>Accepted Teachers Number: {acceptedTeachers}</h3>
+        <h3>Total Accepted Teachers : {acceptedTeachers}</h3>
         <h3>Total amount of money: {totalTeachersMoney} Taka</h3>
+      </div>
+      <div className="card">
+       
+        <h1>Total Collection: {fultotal} Taka</h1>
       </div>
 
       <style>{`

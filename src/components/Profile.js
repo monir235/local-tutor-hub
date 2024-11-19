@@ -45,6 +45,7 @@ const Profile = ({ onPageChange }) => {
     // Clear any necessary session data here
     onPageChange('Login'); // Navigate to Login page on logout
   };
+  
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -85,6 +86,7 @@ const Profile = ({ onPageChange }) => {
         <div>
           <button onClick={handleLogout} style={{ padding: '10px 20px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Logout</button>
         </div>
+        
       </div>
     </div>
   );
