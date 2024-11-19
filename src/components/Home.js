@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 function Home() {
   const [hoveredCard, setHoveredCard] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+ // const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
 
   const cardStyle = (cardName) => ({
     width: '330px',
@@ -31,7 +32,7 @@ function Home() {
   const assignTeacherListData = ["1. Sabbir hossain", "2. Rakib Islam", "3. Sadman Hasan"];
   const studentListData = ["1. MOHAIMIN", "2. NISHAD", "3. OMIN GUPTA"];
 
-  const handleSearchChange = (e) => {
+ /* const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
 
@@ -44,7 +45,7 @@ function Home() {
     } else {
       setSearchResults([]); // Clear search results if search term is empty
     }
-  };
+  };*/
 
   return (
     <div style={{ position: 'relative' , paddingBottom: '130px'}}>
