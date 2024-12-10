@@ -23,14 +23,12 @@ const Tinformation = () => {
 
   const handleAccept = async (tutorId) => {
     try {
-      // Find the tutor with the given tutorId from the tutors arraycd 
       const acceptedTutor = tutors.find((tutor) => tutor.id === tutorId);
       if (!acceptedTutor) {
         console.error('Tutor not found.');
         return;
       }
   
-      // Send a POST request to acceptTutor.php with the accepted tutor data
       const response = await fetch('http://localhost/acceptTutor.php', {
         method: 'POST',
         headers: {
@@ -41,8 +39,7 @@ const Tinformation = () => {
   
       if (response.ok) {
         console.log('Tutor information accepted successfully!');
-        // Remove the accepted tutor from the tutors array
-        setTutors(tutors.filter((tutor) => tutor.id !== tutorId));
+        setTutors(tutors.filter((tutor) => tutor.id !== tutorId)); // Remove the accepted tutor
       } else {
         console.error('Failed to accept tutor information:', response.statusText);
       }
@@ -50,7 +47,6 @@ const Tinformation = () => {
       console.error('Error accepting tutor information:', error.message);
     }
   };
-  
 
   return (
     <div className="container">
@@ -65,9 +61,9 @@ const Tinformation = () => {
             <p>Location: {tutor.location}</p>
             <p>Institution: {tutor.institution}</p>
             <p>Current Subject: {tutor.currentSubject}</p>
-           {/* <button onClick={() => handleAccept(tutor.id)}>
-              {tutor.accepted ? 'Accepted' : 'Accept'}
-        </button>*/}
+            <button onClick={() => handleAccept(tutor.id)}>
+              Accept
+            </button>
           </div>
         ))}
       </div>
