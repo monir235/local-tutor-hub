@@ -847,7 +847,7 @@ const Tinfo = () => {
 
   return (
     <div className="container">
-      <h1></h1>
+      <h1>Available tutor</h1>
       <div className="cardContainer">
         {cards.map((card, index) => (
           <div key={index} className={`card ${card.accepted ? 'accepted' : ''}`}>
