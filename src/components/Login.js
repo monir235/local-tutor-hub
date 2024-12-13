@@ -4,6 +4,10 @@ const Login = ({ onPageChange }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Helper function to validate email format
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleLoginClick = async (e) => {
     e.preventDefault();
@@ -14,26 +18,42 @@ const Login = ({ onPageChange }) => {
       return;
     }
 
-    // Make a POST request to your backend
-    const response = await fetch('http://localhost/loga.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    // Validate email format
+    if (!isValidEmail(email)) {
+      setError("Invalid email format");
+      return;
+    }
 
-    const data = await response.json();
+    setLoading(true);
+    setError(''); // Clear any previous errors
 
-    if (data.success) {
-      // If login is successful, navigate to the Admin page
-      onPageChange('Admin');
-    } else {
-      // If login fails, display an error message
-      setError(data.message);
+    try {
+      // Make a POST request to your backend
+      const response = await fetch('https://localtutorhub.kesug.com/loga.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // If login is successful, navigate to the Admin page
+        onPageChange('Admin');
+      } else {
+        // If login fails, display an error message
+        setError(data.message || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      // Handle network errors or unexpected server issues
+      setError('Unable to connect to the server. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,6 +85,7 @@ const Login = ({ onPageChange }) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-label="Email"
             style={{ 
               width: '100%',
               padding: '10px',
@@ -80,6 +101,7 @@ const Login = ({ onPageChange }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-label="Password"
             style={{ 
               width: '100%',
               padding: '10px',
@@ -94,15 +116,16 @@ const Login = ({ onPageChange }) => {
             type="submit"
             style={{ 
               width: '100%',
-              backgroundColor: '#0000ff',
+              backgroundColor: loading ? '#cccccc' : '#0000ff',
               color: 'white',
               padding: '10px 0',
               border: 'none',
               borderRadius: '4px',
-              cursor: 'pointer',
+              cursor: loading ? 'not-allowed' : 'pointer',
             }}
+            disabled={loading}
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
