@@ -555,7 +555,7 @@ const Stubd = () => {
 
   return (
     <div className="container">
-      <h1></h1>
+      <h1> Available Student</h1>
       <div className="cardContainer">
         {students.map((student, index) => (
           <div key={index} className={`card ${student.accepted ? 'accepted' : ''}`}>
