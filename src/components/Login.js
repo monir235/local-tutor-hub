@@ -29,7 +29,7 @@ const Login = ({ onPageChange }) => {
 
     try {
       // Make a POST request to your backend
-      const response = await fetch('https://localtutorhub.kesug.com/loga.php', {
+      const response = await fetch('https://local-tutor-hub.kesug.com/adminlog.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const Login = ({ onPageChange }) => {
 
       const data = await response.json();
 
-      if (data.success) {
+      if (data.status === "success") {
         // If login is successful, navigate to the Admin page
         onPageChange('Admin');
       } else {
