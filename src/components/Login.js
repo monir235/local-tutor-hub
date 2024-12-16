@@ -12,15 +12,14 @@ const Login = ({ onPageChange }) => {
   const handleLoginClick = async (e) => {
     e.preventDefault();
 
-    // Check if fields are empty
+    // Validate inputs
     if (!email || !password) {
-      setError("Email and password are required");
+      setError('Email and password are required.');
       return;
     }
 
-    // Validate email format
     if (!isValidEmail(email)) {
-      setError("Invalid email format");
+      setError('Invalid email format.');
       return;
     }
 
@@ -28,27 +27,27 @@ const Login = ({ onPageChange }) => {
     setError(''); // Clear any previous errors
 
     try {
-      // Make a POST request to your backend
       const response = await fetch('https://local-tutor-hub.kesug.com/adminlog.php', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ email, password }),
-});
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
+      if (!response.ok) {
+        throw new Error('Failed to connect to the server.');
+      }
 
       const data = await response.json();
 
-      if (data.status === "success") {
-        // If login is successful, navigate to the Admin page
+      if (data.status === 'success') {
+        // Navigate to the Admin page on successful login
         onPageChange('Admin');
       } else {
-        // If login fails, display an error message
         setError(data.message || 'Login failed. Please try again.');
       }
     } catch (err) {
-      // Handle network errors or unexpected server issues
       setError('Unable to connect to the server. Please try again later.');
     } finally {
       setLoading(false);
@@ -56,26 +55,31 @@ const Login = ({ onPageChange }) => {
   };
 
   return (
-    <div style={{ 
-      fontFamily: 'Arial, sans-serif',
-      margin: '0',
-      padding: '0',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      backgroundImage: 'url("/tutor.jpeg")',
-      backgroundSize: 'cover',
-    }}>
-      <div style={{ 
-        width: '300px',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        marginTop: '50px',
-      }}>
+    <div
+      style={{
+        fontFamily: 'Arial, sans-serif',
+        margin: '0',
+        padding: '0',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundImage: 'url("/tutor.jpeg"), linear-gradient(to bottom, #ffffff, #cccccc)',
+        backgroundSize: 'cover',
+        backgroundBlendMode: 'overlay',
+      }}
+    >
+      <div
+        style={{
+          width: '300px',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          marginTop: '50px',
+        }}
+      >
         <h2 style={{ textAlign: 'center', color: '#0000ff' }}>Admin Login</h2>
         <form onSubmit={handleLoginClick}>
           <input
@@ -84,7 +88,7 @@ const Login = ({ onPageChange }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             aria-label="Email"
-            style={{ 
+            style={{
               width: '100%',
               padding: '10px',
               margin: '8px 0',
@@ -92,7 +96,6 @@ const Login = ({ onPageChange }) => {
               borderRadius: '4px',
               boxSizing: 'border-box',
             }}
-            required
           />
           <input
             type="password"
@@ -100,7 +103,7 @@ const Login = ({ onPageChange }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             aria-label="Password"
-            style={{ 
+            style={{
               width: '100%',
               padding: '10px',
               margin: '8px 0',
@@ -108,11 +111,10 @@ const Login = ({ onPageChange }) => {
               borderRadius: '4px',
               boxSizing: 'border-box',
             }}
-            required
           />
           <button
             type="submit"
-            style={{ 
+            style={{
               width: '100%',
               backgroundColor: loading ? '#cccccc' : '#0000ff',
               color: 'white',
@@ -128,7 +130,17 @@ const Login = ({ onPageChange }) => {
         </form>
         {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
       </div>
-      <h1 style={{ fontSize: '100px', color: 'black', marginTop: '150px' }}>Local-Tutor-Hub</h1>
+      <h1
+        style={{
+          fontSize: '48px',
+          color: '#000',
+          marginTop: '50px',
+          textAlign: 'center',
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        }}
+      >
+        Local Tutor Hub
+      </h1>
     </div>
   );
 };
