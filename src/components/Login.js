@@ -29,7 +29,7 @@ const Login = ({ onPageChange }) => {
 
     try {
       // Make a POST request to your backend
-      const response = await fetch('https://local-tutor-hub.kesug.com/adminlog.php', {
+      const response = await fetch('http://local-tutor-hub.kesug.com/adminlog.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
