@@ -50,7 +50,7 @@ const SignInWithEmail = () => {
         backgroundColor: '#fff',
         padding: '20px',
         borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 7px 7px rgba(0, 0, 0, 0.65)'
       }}>
         <h2 style={{ textAlign: 'center', color: '#0000ff' }}>Registration</h2>
         <form onSubmit={handleSubmit}>

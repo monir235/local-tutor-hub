@@ -118,7 +118,7 @@ const styles = {
         padding: '20px',
         border: '1px solid #ccc',
         borderRadius: '5px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 7px 7px rgba(0, 0, 0, 0.65)',
         backgroundColor: '#fff',
     },
     header: {

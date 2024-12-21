@@ -97,6 +97,7 @@ const SearchStu = () => {
           padding: 20px;
           background-color: white;
           font-weight: bold;
+          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
         }
       `}</style>
     </div>

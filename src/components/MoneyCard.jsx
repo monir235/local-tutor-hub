@@ -68,6 +68,7 @@ const MoneyCard = () => {
           width: 500px;
           text-align: center;
           margin: 20px auto;
+          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
         }
         h1 {
           color: #333;
