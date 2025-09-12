@@ -14,7 +14,7 @@ const MoneyCard = () => {
     // Fetch data from the backend
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost/getStuaccept.php');
+        const response = await axios.get('https://51acc8c88c31.ngrok-free.app/getStuaccept.php');
         const data = response.data;
 
         // Students data
