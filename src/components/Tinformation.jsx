@@ -9,7 +9,7 @@ const Tinformation = () => {
         const response = await fetch('https://51acc8c88c31.ngrok-free.app/tinformation.php');
         if (response.ok) {
           const data = await response.json();
-          setTutors(data); // Assuming the response is an array of tutor objects with the specified attributes
+          setTutors(data);
         } else {
           console.error('Failed to fetch tutor information:', response.statusText);
         }
@@ -21,6 +21,7 @@ const Tinformation = () => {
     fetchTutorData();
   }, []);
 
+  // Handle Accept button
   const handleAccept = async (tutorId) => {
     try {
       const acceptedTutor = tutors.find((tutor) => tutor.id === tutorId);
@@ -28,68 +29,61 @@ const Tinformation = () => {
         console.error('Tutor not found.');
         return;
       }
-  
+
       const response = await fetch('https://51acc8c88c31.ngrok-free.app/acceptTutor.php', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(acceptedTutor)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(acceptedTutor),
       });
-  
+
       if (response.ok) {
-        console.log('Tutor information accepted successfully!');
-        setTutors(tutors.filter((tutor) => tutor.id !== tutorId)); // Remove the accepted tutor
+        console.log(`Tutor ${tutorId} accepted successfully.`);
+        alert(`Tutor ${acceptedTutor.name} accepted!`);
       } else {
-        console.error('Failed to accept tutor information:', response.statusText);
+        console.error('Failed to accept tutor:', response.statusText);
       }
     } catch (error) {
-      console.error('Error accepting tutor information:', error.message);
+      console.error('Error accepting tutor:', error.message);
     }
   };
 
   return (
-    <div className="container">
-      <h1>Tutor Informations</h1>
-      <div className="cardContainer">
-        {tutors.map((tutor) => (
-          <div key={tutor.id} className="card">
-            <p>Name: {tutor.name}</p>
-            <p>Availability: {tutor.availability}</p>
-            <p>Mobile Number: {tutor.mobileNumber}</p>
-            <p>Email: {tutor.email}</p>
-            <p>Location: {tutor.location}</p>
-            <p>Institution: {tutor.institution}</p>
-            <p>Current Subject: {tutor.currentSubject}</p>
-            <button onClick={() => handleAccept(tutor.id)}>
-              Accept
-            </button>
-          </div>
-        ))}
-      </div>
-      <style>{`
-        .container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .cardContainer {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-        .card {
-          width: 300px;
-          height: 350px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
-        }
-      `}</style>
+    <div>
+      <h2>Tutor Information</h2>
+      {tutors.length === 0 ? (
+        <p>Loading tutor data...</p>
+      ) : (
+        <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Availability</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Location</th>
+              <th>Institution</th>
+              <th>Subject</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tutors.map((tutor) => (
+              <tr key={tutor.id}>
+                <td>{tutor.name}</td>
+                <td>{tutor.availability}</td>
+                <td>{tutor.mobileNumber}</td>
+                <td>{tutor.email}</td>
+                <td>{tutor.location}</td>
+                <td>{tutor.institution}</td>
+                <td>{tutor.currentSubject}</td>
+                <td>
+                  <button onClick={() => handleAccept(tutor.id)}>Accept</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
