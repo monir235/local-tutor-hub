@@ -11,7 +11,7 @@ const TutorLogin = ({ onPageChange }) => {
     const handleLogin = async () => {
         // Make API call to tutorprofile.php with email and password
         try {
-            const response = await fetch('http://localhost/tutorprofile.php', {
+            const response = await fetch('https://51acc8c88c31.ngrok-free.app/tutorprofile.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ const TutorLogin = ({ onPageChange }) => {
     const handleForgotPassword = async () => {
         // Make API call to forgotpassword.php to recover password via email
         try {
-            const response = await fetch('http://localhost/forgotpassword.php', {
+            const response = await fetch('https://51acc8c88c31.ngrok-free.app/forgotpassword.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
