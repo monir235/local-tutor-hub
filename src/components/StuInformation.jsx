@@ -6,7 +6,7 @@ const StuInformation = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch('http://localhost/students.php');
+        const response = await fetch('https://51acc8c88c31.ngrok-free.app/students.php');
         if (response.ok) {
           const data = await response.json();
           setStudents(data); // Assuming the response is an array of student objects with the specified attributes
