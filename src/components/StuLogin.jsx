@@ -7,7 +7,7 @@ const StuLogin = ({ onPageChange }) => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost/studentprofile.php', {
+            const response = await fetch('https://51acc8c88c31.ngrok-free.app/studentprofile.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
