@@ -6,7 +6,7 @@ const AcceptStu = () => {
   useEffect(() => {
     const fetchAcceptedTutors = async () => {
       try {
-        const response = await fetch('http://localhost/redol.php');
+        const response = await fetch('https://51acc8c88c31.ngrok-free.app/redol.php');
         if (response.ok) {
           const data = await response.json();
           setAcceptedTutors(data);
