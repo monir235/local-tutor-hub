@@ -24,7 +24,7 @@ const TutorForm = ({ onPageChange }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost/tutor.php', {
+      const response = await fetch('https://51acc8c88c31.ngrok-free.app/tutor.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
