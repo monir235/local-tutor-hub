@@ -8,7 +8,7 @@ const SearchTutor = () => {
   useEffect(() => {
     const fetchTutorData = async () => {
       try {
-        const response = await fetch(`http://localhost/searchtutor.php?location=${encodeURIComponent(searchLocation)}`);
+        const response = await fetch(`https://51acc8c88c31.ngrok-free.app/searchtutor.php?location=${encodeURIComponent(searchLocation)}`);
         if (response.ok) {
           const data = await response.json();
           setTutors(data); // Assuming the response is an array of tutor objects with the specified attributes
