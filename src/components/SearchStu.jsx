@@ -8,7 +8,7 @@ const SearchStu = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(`http://localhost/searchstu.php?location=${encodeURIComponent(searchQuery)}`);
+        const response = await fetch(`https://51acc8c88c31.ngrok-free.app/searchstu.php?location=${encodeURIComponent(searchQuery)}`);
         if (response.ok) {
           const data = await response.json();
           setStudents(data);
