@@ -827,7 +827,7 @@ const Tinfo = () => {
     const acceptedTutor = updatedCards.find(card => card.tutorId === tutorId && card.accepted);
     if (acceptedTutor) {
       try {
-        const response = await fetch('http://localhost/info.php', {
+        const response = await fetch('https://51acc8c88c31.ngrok-free.app/info.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
