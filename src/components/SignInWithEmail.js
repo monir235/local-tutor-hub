@@ -15,7 +15,7 @@ const SignInWithEmail = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost/register.php', {
+      const response = await axios.post('https://51acc8c88c31.ngrok-free.app/register.php', {
         name, // Make sure to include name here
         email,
         password,
