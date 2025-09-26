@@ -8,10 +8,12 @@ const SearchTutor = () => {
   useEffect(() => {
     const fetchTutorData = async () => {
       try {
-        const response = await fetch(`http://localhost/searchtutor.php?location=${encodeURIComponent(searchLocation)}`);
+        const response = await fetch(
+          `http://localhost/searchtutor.php?location=${encodeURIComponent(searchLocation)}`
+        );
         if (response.ok) {
           const data = await response.json();
-          setTutors(data); // Assuming the response is an array of tutor objects with the specified attributes
+          setTutors(data);
         } else {
           console.error('Failed to fetch tutor information:', response.statusText);
         }
@@ -24,78 +26,119 @@ const SearchTutor = () => {
   }, [searchLocation]);
 
   useEffect(() => {
-    setFilteredTutors(tutors.filter(tutor => tutor.location.toLowerCase().includes(searchLocation.toLowerCase())));
+    setFilteredTutors(
+      tutors.filter((tutor) =>
+        tutor.location.toLowerCase().includes(searchLocation.toLowerCase())
+      )
+    );
   }, [searchLocation, tutors]);
-
-  const handleSearch = () => {
-    // Triggered when search button is clicked
-    // Here you can perform additional filtering or sorting if needed
-    // For now, it's handled in the useEffect above
-  };
 
   return (
     <div className="container">
-      <h1>Search Tutor by location</h1>
+      <h1>Search Tutor by Location</h1>
       <div className="search">
         <input
           type="text"
-          placeholder="Search by location"
+          placeholder="Enter location"
           value={searchLocation}
           onChange={(e) => setSearchLocation(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={() => {}}>Search</button>
       </div>
       <div className="cardContainer">
         {filteredTutors.map((tutor) => (
           <div key={tutor.id} className="card">
-            <p>Name: {tutor.name}</p>
-            <p>Availability: {tutor.availability}</p>
-            <p>Mobile Number: {tutor.mobileNumber}</p>
-            <p>Email: {tutor.email}</p>
-            <p>Location: {tutor.location}</p>
-            <p>Institution: {tutor.institution}</p>
-            <p>Current Subject: {tutor.currentSubject}</p>
+            <h2>{tutor.name}</h2>
+            <p><strong>Availability:</strong> {tutor.availability}</p>
+            <p><strong>Mobile:</strong> {tutor.mobileNumber}</p>
+            <p><strong>Email:</strong> {tutor.email}</p>
+            <p><strong>Location:</strong> {tutor.location}</p>
+            <p><strong>Institution:</strong> {tutor.institution}</p>
+            <p><strong>Subject:</strong> {tutor.currentSubject}</p>
           </div>
         ))}
       </div>
-      <style>{`
+
+      <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 50px 20px;
+          min-height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #6a11cb, #2575fc);
+          color: #fff;
+        }
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 40px;
+          font-weight: 700;
+          text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
         .search {
-          margin-bottom: 20px;
+          display: flex;
+          gap: 10px;
+          margin-bottom: 40px;
         }
         .search input {
-          padding: 8px;
-          margin-right: 10px;
+          padding: 12px 15px;
+          border-radius: 10px;
+          border: none;
+          outline: none;
+          width: 250px;
+          font-size: 1rem;
         }
         .search button {
-          padding: 8px 16px;
-          background-color: #007bff;
-          color: white;
+          padding: 12px 20px;
+          border-radius: 10px;
           border: none;
+          background: #ff7e5f;
+          color: white;
+          font-weight: 600;
           cursor: pointer;
+          transition: transform 0.3s, background 0.3s;
         }
         .search button:hover {
-          background-color: #0056b3;
+          background: #feb47b;
+          transform: scale(1.05);
         }
         .cardContainer {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 20px;
+          gap: 25px;
         }
         .card {
           width: 300px;
-          height: 350px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
+          border-radius: 20px;
+          padding: 25px;
+          background: #ffffff;
+          color: #333;
+          text-align: center;
+          font-weight: 500;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card h2 {
+          font-size: 1.5rem;
+          margin-bottom: 15px;
+          font-weight: 700;
+          color: #007bff;
+        }
+        .card p {
+          margin: 8px 0;
+          font-size: 1rem;
+        }
+        @media (max-width: 900px) {
+          .cardContainer {
+            flex-direction: column;
+            align-items: center;
+          }
         }
       `}</style>
     </div>

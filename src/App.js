@@ -84,7 +84,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ backgroundImage: 'url("/backf.jpg")', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div className="App" style={{ backgroundImage: 'url("/backf.jpg")', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', minHeight: '100vh', display: 'flex',flexDirection:'column' }}>
       {currentPage !== 'Login' && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0' }}>
           <button onClick={() => setCurrentPage('Admin')} style={{ padding: '15px 20px', fontSize: '16px', backgroundColor: '#0000ff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer',boxShadow:'0 7px 7px rgba(0, 0, 0, 0.65)' }}>Home Page</button>

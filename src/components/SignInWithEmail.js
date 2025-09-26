@@ -16,72 +16,42 @@ const SignInWithEmail = () => {
     }
     try {
       const response = await axios.post('http://localhost/register.php', {
-        name, // Make sure to include name here
+        name,
         email,
         password,
-        retypePassword
+        retypePassword,
       });
       console.log(response.data);
       setRegistrationMessage('Registration successful!');
-      // Reset all states
       setName('');
       setEmail('');
       setPassword('');
       setRetypePassword('');
     } catch (error) {
       console.error(error);
-      setRegistrationMessage('');
+      setRegistrationMessage('Registration failed!');
     }
   };
 
   return (
-    <div style={{
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#f4f4f4',
-      margin: '0',
-      padding: '0',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh'
-    }}>
-      <div style={{
-        width: '300px',
-        backgroundColor: '#fff',
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
-      }}>
-        <h2 style={{ textAlign: 'center', color: '#333' }}>Sign Up</h2>
+    <div style={styles.pageBackground}>
+      <div style={styles.card}>
+        <h2 style={styles.header}>Create Account</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Full Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              margin: '8px 0',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              boxSizing: 'border-box'
-            }}
+            style={styles.input}
             required
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              margin: '8px 0',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              boxSizing: 'border-box'
-            }}
+            style={styles.input}
             required
           />
           <input
@@ -89,54 +59,125 @@ const SignInWithEmail = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              margin: '8px 0',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              boxSizing: 'border-box'
-            }}
+            style={styles.input}
             required
           />
           <input
             type="password"
-            placeholder="Retype Password"
+            placeholder="Confirm Password"
             value={retypePassword}
             onChange={(e) => setRetypePassword(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              margin: '8px 0',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              boxSizing: 'border-box'
-            }}
+            style={styles.input}
             required
           />
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              backgroundColor: '#0000ff',
-              color: 'white',
-              padding: '10px 0',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
-          >
+          <button type="submit" style={styles.button}>
             Register
           </button>
         </form>
         {registrationMessage && (
-          <p style={{ textAlign: 'center', color: registrationMessage.includes('successful') ? 'green' : 'red' }}>
+          <p
+            style={{
+              marginTop: '12px',
+              color: registrationMessage.includes('successful') ? '#00ff9d' : '#ff9d9d',
+              fontSize: '14px',
+            }}
+          >
             {registrationMessage}
           </p>
         )}
       </div>
+
+      {/* Footer */}
+      <footer style={styles.footer}>
+        <div>
+          <a href="https://www.facebook.com/sirajummonir.monir.5" target="_blank" rel="noopener noreferrer">
+            <img src="/fb1.png" alt="Facebook" style={styles.icon} />
+          </a>
+          <a href="https://twitter.com/ayon_chayo33456" target="_blank" rel="noopener noreferrer">
+            <img src="/twitter.jpeg" alt="Twitter" style={styles.icon} />
+          </a>
+          <a href="https://www.instagram.com/monir_chayon/" target="_blank" rel="noopener noreferrer">
+            <img src="/insta.jpeg" alt="Instagram" style={styles.icon} />
+          </a>
+          <a href="https://github.com/monir235" target="_blank" rel="noopener noreferrer">
+            <img src="/git.png" alt="GitHub" style={styles.icon} />
+          </a>
+          <a href="https://web.cu.ac.bd/v2/" target="_blank" rel="noopener noreferrer">
+            <img src="/Culogo.jpeg" alt="CU" style={styles.icon} />
+          </a>
+        </div>
+        <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
+          © 2024 Sirajum Monir | University of Chittagong
+        </div>
+      </footer>
     </div>
   );
+};
+
+const styles = {
+  pageBackground: {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    padding: '20px',
+  },
+  card: {
+    width: '400px',
+    margin: 'auto',
+    padding: '35px',
+    borderRadius: '18px',
+    background: 'rgba(255, 255, 255, 0.12)',
+    backdropFilter: 'blur(18px)',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+    textAlign: 'center',
+    color: '#fff',
+  },
+  header: {
+    marginBottom: '25px',
+    fontSize: '1.8rem',
+    fontWeight: 'bold',
+  },
+  input: {
+    width: '100%',
+    padding: '14px',
+    borderRadius: '10px',
+    border: 'none',
+    outline: 'none',
+    marginBottom: '15px',
+    fontSize: '15px',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    color: '#fff',
+    transition: 'all 0.3s ease',
+  },
+  button: {
+    width: '100%',
+    padding: '14px',
+    background: 'linear-gradient(90deg, #ff512f, #dd2476)',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '10px',
+    fontSize: '16px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    transition: 'all 0.3s ease',
+  },
+  footer: {
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    color: '#ffffff',
+    textAlign: 'center',
+    padding: '20px',
+    borderRadius: '12px',
+    marginTop: '30px',
+  },
+  icon: {
+    width: '30px',
+    margin: '0 10px',
+    borderRadius: '50%',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+  },
 };
 
 export default SignInWithEmail;

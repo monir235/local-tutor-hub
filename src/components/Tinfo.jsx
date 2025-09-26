@@ -846,54 +846,98 @@ const Tinfo = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Available tutor</h1>
-      <div className="cardContainer">
-        {cards.map((card, index) => (
-          <div key={index} className={`card ${card.accepted ? 'accepted' : ''}`}>
-            <p>Name: {card.name}</p>
-            <p>Availability: {card.availability}</p>
-            <p>Mobile Number: {card.mobileNumber}</p>
-            <p>Email: {card.email}</p>
-            <p>Location: {card.location}</p>
-            <p>Institution: {card.institution}</p>
-            <p>Current Subject: {card.currentSubject}</p>
-            <p>Teaching Experience: {card.teachingExperience} years</p>
-            <p>{card.additionalInfo}</p>
-            <button onClick={() => handleAccept(card.tutorId)}>
-              {card.accepted ? 'Applied' : 'Apply'}
-            </button>
-          </div>
-        ))}
-      </div>
-      <style jsx>{`
-        .container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .cardContainer {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-        .card {
-          width: 300px;
-          height: 350px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
-        }
-        .card.accepted {
-          background-color: lightgreen;
-        }
-      `}</style>
+  <div className="container">
+    <h1>Available Tutors</h1>
+    <div className="cardContainer">
+      {cards.map((card, index) => (
+        <div key={index} className={`card ${card.accepted ? 'accepted' : ''}`}>
+          <h3>{card.name}</h3>
+          <p><strong>Availability:</strong> {card.availability}</p>
+          <p><strong>Mobile:</strong> {card.mobileNumber}</p>
+          <p><strong>Email:</strong> {card.email}</p>
+          <p><strong>Location:</strong> {card.location}</p>
+          <p><strong>Institution:</strong> {card.institution}</p>
+          <p><strong>Subject:</strong> {card.currentSubject}</p>
+          <p><strong>Experience:</strong> {card.teachingExperience} years</p>
+          {card.additionalInfo && <p>{card.additionalInfo}</p>}
+          <button onClick={() => handleAccept(card.tutorId)}>
+            {card.accepted ? 'Applied' : 'Apply'}
+          </button>
+        </div>
+      ))}
     </div>
-  );
+
+    <style jsx>{`
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #fff;
+        margin-bottom: 40px;
+        font-weight: 700;
+      }
+      .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+      }
+      .card {
+        width: 320px;
+        border-radius: 15px;
+        padding: 25px;
+        background: #ffffff;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.07);
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-weight: 500;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.1);
+      }
+      .card.accepted {
+        background: #d4edda;
+        border: 1px solid #28a745;
+      }
+      .card h3 {
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: #007bff;
+      }
+      .card p {
+        margin: 6px 0;
+        color: #555;
+      }
+      .card button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background-color: #007bff;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .card button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      @media (max-width: 700px) {
+        .card {
+          width: 90%;
+        }
+      }
+    `}</style>
+  </div>
+);
 };
 
 export default Tinfo;

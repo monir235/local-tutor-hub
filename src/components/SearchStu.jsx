@@ -8,7 +8,9 @@ const SearchStu = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(`http://localhost/searchstu.php?location=${encodeURIComponent(searchQuery)}`);
+        const response = await fetch(
+          `http://localhost/searchstu.php?location=${encodeURIComponent(searchQuery)}`
+        );
         if (response.ok) {
           const data = await response.json();
           setStudents(data);
@@ -24,17 +26,16 @@ const SearchStu = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    setFilteredStudents(students.filter(student =>
-      student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.school.toLowerCase().includes(searchQuery.toLowerCase())
-    ));
+    setFilteredStudents(
+      students.filter(
+        (student) =>
+          student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          student.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          student.school.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
   }, [searchQuery, students]);
-
-  const handleSearch = () => {
-    
-  };
 
   return (
     <div className="container">
@@ -42,62 +43,104 @@ const SearchStu = () => {
       <div className="search">
         <input
           type="text"
-          placeholder="Search by location"
+          placeholder="Search location or school"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button>Search</button>
       </div>
       <div className="cardContainer">
         {filteredStudents.map((student) => (
           <div key={student.id} className="card">
-            <p>Name: {student.name}</p>
-            <p>Email: {student.email}</p>
-            <p>Location: {student.location}</p>
-            <p>Institution: {student.school}</p>
-            <p>Salary offerd:5000</p>
-            
+            <h2>{student.name}</h2>
+            <p><strong>Email:</strong> {student.email}</p>
+            <p><strong>Location:</strong> {student.location}</p>
+            <p><strong>Institution:</strong> {student.school}</p>
+            <p><strong>Salary Offered:</strong> 5000 Taka</p>
           </div>
         ))}
       </div>
-      <style>{`
+
+      <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 50px 20px;
+          min-height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #6a11cb, #2575fc);
+          color: #fff;
+        }
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 40px;
+          font-weight: 700;
+          text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
         .search {
-          margin-bottom: 20px;
+          display: flex;
+          gap: 10px;
+          margin-bottom: 40px;
         }
         .search input {
-          padding: 8px;
-          margin-right: 10px;
+          padding: 12px 15px;
+          border-radius: 10px;
+          border: none;
+          outline: none;
+          width: 300px;
+          font-size: 1rem;
         }
         .search button {
-          padding: 8px 16px;
-          background-color: #007bff;
-          color: white;
+          padding: 12px 20px;
+          border-radius: 10px;
           border: none;
+          background: #ff7e5f;
+          color: white;
+          font-weight: 600;
           cursor: pointer;
+          transition: transform 0.3s, background 0.3s;
         }
         .search button:hover {
-          background-color: #0056b3;
+          background: #feb47b;
+          transform: scale(1.05);
         }
         .cardContainer {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 20px;
+          gap: 25px;
         }
         .card {
           width: 300px;
-          height: 200px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
+          border-radius: 20px;
+          padding: 25px;
+          background: #ffffff;
+          color: #333;
+          text-align: center;
+          font-weight: 500;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card h2 {
+          font-size: 1.5rem;
+          margin-bottom: 15px;
+          font-weight: 700;
+          color: #007bff;
+        }
+        .card p {
+          margin: 8px 0;
+          font-size: 1rem;
+        }
+        @media (max-width: 900px) {
+          .cardContainer {
+            flex-direction: column;
+            align-items: center;
+          }
         }
       `}</style>
     </div>
@@ -105,6 +148,3 @@ const SearchStu = () => {
 };
 
 export default SearchStu;
-
-
-

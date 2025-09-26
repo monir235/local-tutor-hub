@@ -9,7 +9,7 @@ const StuInformation = () => {
         const response = await fetch('http://localhost/students.php');
         if (response.ok) {
           const data = await response.json();
-          setStudents(data); // Assuming the response is an array of student objects with the specified attributes
+          setStudents(data); // Array of student objects
         } else {
           console.error('Failed to fetch student information:', response.statusText);
         }
@@ -22,44 +22,60 @@ const StuInformation = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Student Information</h1>
-      <div className="cardContainer">
+    <div style={styles.background}>
+      <h1 style={styles.header}>Student Information</h1>
+      <div style={styles.cardContainer}>
         {students.map((student) => (
-          <div key={student.id} className="card">
-            <p>Name: {student.name}</p>
-            <p>Email: {student.email}</p>
-            <p>Location: {student.location}</p>
-            <p>Institution: {student.school}</p>
-            <p>Salary Offered: 5000</p>
+          <div key={student.id} style={styles.card}>
+            <p><strong>Name:</strong> {student.name}</p>
+            <p><strong>Email:</strong> {student.email}</p>
+            <p><strong>Location:</strong> {student.location}</p>
+            <p><strong>Institution:</strong> {student.school}</p>
+            <p><strong>Salary Offered:</strong> 5000</p>
           </div>
         ))}
       </div>
-      <style>{`
-        .container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .cardContainer {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-        .card {
-          width: 300px;
-          height: 250px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
-        }
-      `}</style>
     </div>
   );
+};
+
+const styles = {
+  background: {
+    minHeight: '100vh',
+    padding: '50px 20px',
+    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  },
+  header: {
+    color: '#fff',
+    fontSize: '2.5rem',
+    marginBottom: '40px',
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  cardContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '25px',
+  },
+  card: {
+    width: '300px',
+    padding: '25px',
+    borderRadius: '20px',
+    background: 'rgba(255, 255, 255, 0.15)',
+    backdropFilter: 'blur(15px)',
+    color: '#fff',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    transition: 'transform 0.3s, box-shadow 0.3s',
+  },
+  cardHover: {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 12px 25px rgba(0, 0, 0, 0.35)',
+  }
 };
 
 export default StuInformation;

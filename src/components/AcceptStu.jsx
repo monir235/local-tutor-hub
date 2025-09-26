@@ -37,27 +37,52 @@ const AcceptStu = () => {
           </div>
         ))}
       </div>
-      <style>{`
+     <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 40px 20px;
+          background: linear-gradient(135deg, #6a11cb, #2575fc);
+          min-height: 100vh;
+          font-family: Arial, sans-serif;
+        }
+        h1 {
+          color: #fff;
+          margin-bottom: 40px;
+          font-weight: 700;
         }
         .cardContainer {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 20px;
+          gap: 25px;
         }
         .card {
-          width: 280px;
-          height: 250px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          padding: 20px;
-          background-color: white;
-          font-weight: bold;
-          box-shadow: 0 7px 7px rgba(0, 0, 0, 0.65);
+          width: 320px;
+          border-radius: 15px;
+          padding: 25px;
+          background: #ffffff;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.07);
+          font-weight: 500;
+        }
+        .card.accepted {
+          background: #d4edda;
+          border: 1px solid #28a745;
+        }
+        .card h3 {
+          margin-bottom: 12px;
+          font-weight: 600;
+          color: #007bff;
+        }
+        .card p {
+          margin: 6px 0;
+          color: #555;
+        }
+        @media (max-width: 700px) {
+          .card {
+            width: 90%;
+          }
         }
       `}</style>
     </div>

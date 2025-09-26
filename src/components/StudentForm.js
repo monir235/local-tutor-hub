@@ -20,7 +20,6 @@ function StudentForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if any required field is empty
     for (const key in formData) {
       if (formData[key] === '') {
         console.error(`Error: ${key} field is required.`);
@@ -28,7 +27,6 @@ function StudentForm() {
       }
     }
 
-    // Send form data to server using AJAX
     fetch('addstudent.php', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -36,42 +34,107 @@ function StudentForm() {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.text())
-    .then(data => {
-      console.log(data);
-      setShowSuccessMessage(true); // Show success message after successful submission
-    })
-    .catch(error => console.error('Error:', error));
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        setShowSuccessMessage(true);
+      })
+      .catch(error => console.error('Error:', error));
   };
 
   return (
-    <div style={{ width: '450px', margin: 'auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: 'white' }}>
+    <div className="form-container">
       <h2>Add New Student</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="Student_ID" style={{ fontWeight: 'bold' }}>Student ID:</label><br />
-        <input type="text" id="Student_ID" name="Student_ID" value={formData.Student_ID} onChange={handleChange} required /><br />
-        
-        <label htmlFor="name" style={{ fontWeight: 'bold' }}>Name:</label><br />
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required /><br />
-        
-        <label htmlFor="mobile_No" style={{ fontWeight: 'bold' }}>Mobile Number:</label><br />
-        <input type="text" id="mobile_No" name="mobile_No" value={formData.mobile_No} onChange={handleChange} required /><br />
-        
-        <label htmlFor="email" style={{ fontWeight: 'bold' }}>Email:</label><br />
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required /><br />
-        
-        <label htmlFor="salary_Offer" style={{ fontWeight: 'bold' }}>Salary Offer:</label><br />
-        <input type="number" id="salary_Offer" name="salary_Offer" value={formData.salary_Offer} onChange={handleChange} required /><br />
-        
-        <label htmlFor="day_per_week" style={{ fontWeight: 'bold' }}>Days Per Week:</label><br />
-        <input type="number" id="day_per_week" name="day_per_week" value={formData.day_per_week} onChange={handleChange} required /><br />
-        
-        <label htmlFor="Location" style={{ fontWeight: 'bold' }}>Location:</label><br />
-        <input type="text" id="Location" name="Location" value={formData.Location} onChange={handleChange} required /><br />
-        
+        {Object.keys(formData).map((key) => (
+          <div className="form-group" key={key}>
+            <label htmlFor={key}>{key.replace(/_/g, ' ')}:</label>
+            <input
+              type={key.includes('email') ? 'email' : key.includes('salary') || key.includes('day') ? 'number' : 'text'}
+              id={key}
+              name={key}
+              value={formData[key]}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        ))}
+
         <button type="submit">Submit</button>
-        {showSuccessMessage && <p style={{ color: 'green' }}>New student Added Successfully</p>} {/* Show success message */}
+        {showSuccessMessage && <p className="success-message">New student added successfully!</p>}
       </form>
+
+      <style jsx>{`
+        .form-container {
+          width: 400px;
+          margin: 50px auto;
+          padding: 30px;
+          border-radius: 20px;
+          background: #ffffff;
+          box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          transition: transform 0.3s;
+        }
+        .form-container:hover {
+          transform: translateY(-5px);
+        }
+        h2 {
+          text-align: center;
+          margin-bottom: 30px;
+          color: #6a11cb;
+          font-size: 1.8rem;
+        }
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 15px;
+        }
+        label {
+          margin-bottom: 6px;
+          font-weight: 600;
+          color: #333;
+        }
+        input {
+          padding: 12px 15px;
+          border-radius: 12px;
+          border: 1px solid #ccc;
+          font-size: 1rem;
+          transition: all 0.3s;
+        }
+        input:focus {
+          outline: none;
+          border-color: #6a11cb;
+          box-shadow: 0 0 8px rgba(106,17,203,0.3);
+        }
+        button {
+          width: 100%;
+          padding: 14px;
+          border-radius: 15px;
+          border: none;
+          background: linear-gradient(135deg, #6a11cb, #2575fc);
+          color: white;
+          font-weight: 700;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .success-message {
+          margin-top: 15px;
+          text-align: center;
+          color: #28a745;
+          font-weight: 600;
+        }
+        @media (max-width: 450px) {
+          .form-container {
+            width: 90%;
+            padding: 20px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
